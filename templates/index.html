@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CST Central Directory</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #a8edea, #fed6e3);
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+        }
+
+        .form-container {
+            background: #ffffff;
+            padding: 35px 45px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 550px;
+            transition: transform 0.3s ease;
+        }
+
+        .form-container:hover {
+            transform: translateY(-2px);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            font-size: 26px;
+        }
+
+        label {
+            font-weight: 600;
+            margin-top: 12px;
+            display: block;
+            color: #34495e;
+        }
+
+        input[type="text"],
+        select,
+        button,
+        textarea {
+            width: 100%;
+            padding: 11px 14px;
+            margin-top: 8px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+
+        select {
+            background-color: #f9f9f9;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #7bc6cc;
+            box-shadow: 0 0 5px rgba(123, 198, 204, 0.5);
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+            margin-top: 20px;
+            border: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+            transform: scale(1.02);
+        }
+
+        textarea {
+            margin-top: 15px;
+            background-color: #f5f5f5;
+            resize: vertical;
+            border-color: #bbb;
+        }
+
+        .response-section {
+            margin-top: 35px;
+            padding: 25px;
+            background-color: #f0f8ff;
+            border-left: 6px solid #3498db;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 550px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .response-section h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        @media screen and (max-width: 600px) {
+            body {
+                padding: 20px;
+            }
+
+            .form-container,
+            .response-section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Form container -->
+    <div class="form-container">
+        <h2>📘 CST Central Directory</h2>
+        <form method="POST">
+            <label for="action">Choose Action:</label>
+            <select name="action" id="action" required>
+                <option value="">-- Select an option --</option>
+                <option value="get_email_by_name">Get Email (First & Last Name)</option>
+                <option value="get_email_by_dept">Get Email (Dept & Last Name)</option>
+                <option value="get_phone">Get Phone Number</option>
+                <option value="list_by_dept">List All Members in Department</option>
+            </select>
+
+            <label for="first">First Name:</label>
+            <input type="text" name="first" id="first" placeholder="e.g. John">
+
+            <label for="last">Last Name:</label>
+            <input type="text" name="last" id="last" placeholder="e.g. Doe">
+
+            <label for="dept">Department:</label>
+            <input type="text" name="dept" id="dept" placeholder="e.g. D01">
+
+            <button type="submit">Send Request</button>
+        </form>
+    </div>
+
+    <!-- Response section outside the form container -->
+    {% if result %}
+    <div class="response-section">
+        <h3>Response:</h3>
+        <textarea readonly rows="6">{{ result }}</textarea>
+    </div>
+    {% endif %}
+
+</body>
+</html>
